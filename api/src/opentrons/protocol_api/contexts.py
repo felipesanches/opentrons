@@ -802,6 +802,7 @@ class InstrumentContext(CommandPublisher):
         :param volume: The volume of liquid to dispense, in microliters. If not
                        specified, defaults to :py:attr:`current_volume`.
         :type volume: int or float
+
         :param location: Where to dispense into. If `location` is a
                          :py:class:`.Well`, the robot will dispense into
                          :py:attr:`well_bottom_clearance```.dispense`` mm
@@ -816,6 +817,7 @@ class InstrumentContext(CommandPublisher):
                      `rate` * :py:attr:`dispense_speed`. If not specified,
                      defaults to 1.0 (speed will not be modified).
         :type rate: float
+
         :returns: This instance.
 
         .. note::
@@ -876,7 +878,7 @@ class InstrumentContext(CommandPublisher):
         pipette's :py:attr:`max_volume`.
 
         :param repetitions: how many times the pipette should mix (default: 1)
-        :param volume: number of microlitres to mix (default:
+        :param volume: number of microliters to mix (default:
                        :py:attr:`max_volume`)
         :param location: a Well or a position relative to well.
                          e.g, `plate.rows()[0][0].bottom()`
@@ -896,10 +898,9 @@ class InstrumentContext(CommandPublisher):
             want to specify repetitions, you would call
             ``pipette.mix(volume=10, location=wellplate['A1'])``. Unlike
             previous API versions, ``mix`` will not attempt to guess your
-           inputs; the first argument will always be interpreted as
-           ``repetitions``, the second as ``volume``, and the third as
-           ``location`` unless you use keywords.
-
+            inputs; the first argument will always be interpreted as
+            ``repetitions``, the second as ``volume``, and the third as
+            ``location`` unless you use keywords.
 
         """
         self._log.debug(
@@ -1348,10 +1349,9 @@ class InstrumentContext(CommandPublisher):
         :param source: A single well from where liquid will be aspirated.
         :param dest: List of Wells where liquid will be dispensed to.
         :param kwargs: See :py:meth:`transfer`. Some arguments are changed.
-                       Specifically,
-                       - ``mix_after``, if specified, is ignored.
-                       - ``disposal_volume``, if not specified, is set to the
-                         minimum volume of the pipette
+                       Specifically, ``mix_after``, if specified, is ignored
+                       and ``disposal_volume``, if not specified, is set to the
+                       minimum volume of the pipette
         :returns: This instance
         """
         self._log.debug("Distributing {} from {} to {}"
@@ -1376,9 +1376,8 @@ class InstrumentContext(CommandPublisher):
         :param source: List of wells from where liquid will be aspirated.
         :param dest: The single well into which liquid will be dispensed.
         :param kwargs: See :py:meth:`transfer`. Some arguments are changed.
-                       Specifically,
-                       - ``mix_before``, if specified, is ignored.
-                       - ``disposal_volume`` is ignored and set to 0.
+                       Specifically, ``mix_before``, if specified, is ignored
+                       and ``disposal_volume`` is ignored and set to 0.
         :returns: This instance
         """
         self._log.debug("Consolidate {} from {} to {}"
@@ -2118,6 +2117,7 @@ class ThermocyclerContext(ModuleContext):
         """ Set the target temperature for the well block, in °C.
 
         Valid operational range yet to be determined.
+
         :param temperature: The target temperature, in °C.
         :param hold_time_minutes: The number of minutes to hold, after reaching
                                   ``temperature``, before proceeding to the
@@ -2138,7 +2138,6 @@ class ThermocyclerContext(ModuleContext):
             If ``hold_time_minutes`` and ``hold_time_seconds`` are not
             specified, the Thermocycler will proceed to the next command
             after ``temperature`` is reached.
-
         """
         return self._module.set_temperature(
                 temperature=temperature,
@@ -2228,22 +2227,22 @@ class ThermocyclerContext(ModuleContext):
 
     @property
     def block_temperature(self):
-        """ Current temperature in degrees C"""
+        """ Current temperature in degrees C """
         return self._module.temperature
 
     @property
     def block_target_temperature(self):
-        """ Target temperature in degrees C"""
+        """ Target temperature in degrees C """
         return self._module.target
 
     @property
     def lid_temperature(self):
-        """ Current temperature in degrees C"""
+        """ Current temperature in degrees C """
         return self._module.lid_temp
 
     @property
     def lid_target_temperature(self):
-        """ Target temperature in degrees C"""
+        """ Target temperature in degrees C """
         return self._module.lid_target
 
     @property
