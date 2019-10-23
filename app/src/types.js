@@ -13,10 +13,16 @@ import type { Config, ConfigAction } from './config'
 import type { DiscoveryState, DiscoveryAction } from './discovery'
 import type { ProtocolState, ProtocolAction } from './protocol'
 
+import type {
+  RobotSettingsState,
+  RobotSettingsAction,
+} from './robot-settings/types'
+
 export type State = $ReadOnly<{|
   robot: RobotState,
   api: HttpApiState,
   robotApi: RobotApiState,
+  robotSettings: RobotSettingsState,
   config: Config,
   discovery: DiscoveryState,
   protocol: ProtocolState,
@@ -28,6 +34,7 @@ export type Action =
   | RobotAction
   | HttpApiAction
   | RobotApiAction
+  | RobotSettingsAction
   | ShellAction
   | ConfigAction
   | RouterAction
