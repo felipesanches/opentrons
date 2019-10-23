@@ -42,6 +42,15 @@ export type FormModulesByType = {
   [type: ModuleType]: FormModule,
 }
 
+// ModulesForEditModulesCard:  {
+export type ModulesForEditModulesCard = {
+  [type: ModuleType]: {
+    moduleId: string,
+    slot: string, // TODO make this PD specific slot type with spans
+    model: string,
+  },
+}
+
 // =========== LABWARE ========
 
 export type NormalizedLabwareById = {
